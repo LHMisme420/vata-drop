@@ -25,6 +25,7 @@
     .status{font-size:12px;margin-top:10px;}
     .ok{color:#9cff9c;}
     .bad{color:#ff9c9c;}
+    .note{opacity:.7}
   </style>
 </head>
 <body>
@@ -51,7 +52,33 @@
     </div>
 
     <div class="panel">
-      <div class="small">VERIFY CHECKSUM (SHA-256)</div>
+      <div class="small">VERIFY DOWNLOAD</div>
+      <div class="small note">
+        Browsers can’t prove integrity alone. Verification = checksum.
+        Use the button to copy the exact command, or pick the file for quick sanity checks.
+      </div>
+
+      <div class="row">
+        <button class="btn" onclick="copyVerifyCmd()">COPY VERIFY COMMAND</button>
+        <label class="btn" style="display:inline-block;">
+          PICK DOWNLOADED ZIP
+          <input id="filePick" type="file" accept=".zip" style="display:none" onchange="checkPickedFile()" />
+        </label>
+      </div>
+
+      <div class="hr"></div>
+
+      <div class="small">Expected filename:</div>
+      <div class="mono small" id="expectedName">VATA_DROP_v2_MASTER.zip</div>
+
+      <div class="small" style="margin-top:10px;">Expected size (bytes):</div>
+      <div class="mono small" id="expectedSize">57976</div>
+
+      <div id="fileStatus" class="status"></div>
+
+      <div class="hr"></div>
+
+      <div class="small">Expected SHA-256:</div>
       <div class="mono small" id="expectedHash">Human_Override_Protocol_v2_MASTER.md</div>
 
       <div class="row">
@@ -60,18 +87,17 @@
 
       <div class="hr"></div>
 
-      <div class="small">Compute on Windows PowerShell:</div>
-      <div class="small"><code>Get-FileHash .\VATA_DROP_v2_MASTER.zip -Algorithm SHA256</code></div>
-
-      <div class="hr"></div>
-
-      <div class="small">Paste your computed hash here to confirm match:</div>
+      <div class="small">Paste your computed SHA-256 here to confirm match:</div>
       <input id="userHash" placeholder="paste SHA-256 hash here" oninput="checkHash()" autocomplete="off" spellcheck="false" />
       <div id="matchStatus" class="status"></div>
 
       <div class="hr"></div>
-      <div class="small">Expected line:</div>
+      <div class="small">Expected checksum line:</div>
       <div class="mono small">Human_Override_Protocol_v2_MASTER.md</div>
+
+      <div class="hr"></div>
+      <div class="small">PowerShell (Windows):</div>
+      <div class="small"><code id="verifyCmd">Get-FileHash .\VATA_DROP_v2_MASTER.zip -Algorithm SHA256</code></div>
     </div>
 
     <div class="panel">
@@ -95,6 +121,36 @@ function normalizeHash(s){
 function copyExpected(){
   const t = document.getElementById("expectedHash").innerText.trim();
   navigator.clipboard.writeText(t);
+}
+function copyVerifyCmd(){
+  const cmd = document.getElementById("verifyCmd").innerText.trim();
+  navigator.clipboard.writeText(cmd);
+  const el = document.getElementById("fileStatus");
+  el.textContent = "Copied verify command. Run it in the folder where the ZIP is located, then paste the hash below.";
+  el.className = "status";
+}
+function checkPickedFile(){
+  const input = document.getElementById("filePick");
+  const el = document.getElementById("fileStatus");
+  if (!input.files || !input.files[0]) { el.textContent=""; el.className="status"; return; }
+
+  const f = input.files[0];
+  const expectedName = document.getElementById("expectedName").innerText.trim();
+  const expectedSize = parseInt(document.getElementById("expectedSize").innerText.trim(), 10);
+
+  const nameOk = (f.name === expectedName);
+  const sizeOk = (f.size === expectedSize);
+
+  if (nameOk && sizeOk){
+    el.textContent = "FILE LOOKS RIGHT ✅ (name + size match). Now verify SHA-256 for true integrity.";
+    el.className = "status ok";
+  } else {
+    const parts = [];
+    if (!nameOk) parts.push("name mismatch");
+    if (!sizeOk) parts.push("size mismatch");
+    el.textContent = "WARNING ❌ " + parts.join(" + ") + ". You may have the wrong file. Verify SHA-256 anyway.";
+    el.className = "status bad";
+  }
 }
 function checkHash(){
   const expected = normalizeHash(document.getElementById("expectedHash").innerText);
