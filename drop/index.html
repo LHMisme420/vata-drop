@@ -1,0 +1,115 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>PROJECT VATA // ACCESS</title>
+  <style>
+    :root { color-scheme: dark; }
+    body {
+      margin: 0;
+      background: #050505;
+      color: #eaeaea;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      letter-spacing: 0.2px;
+    }
+    .wrap {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 48px 18px 80px;
+    }
+    .topline {
+      display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap;
+      font-size: 12px; opacity: 0.85;
+      border-bottom: 1px solid #1a1a1a;
+      padding-bottom: 14px;
+      margin-bottom: 28px;
+    }
+    .tag { opacity: 0.8; }
+    h1 {
+      font-size: 30px;
+      font-weight: 700;
+      margin: 0 0 10px;
+    }
+    .sub {
+      opacity: 0.78;
+      line-height: 1.55;
+      margin-bottom: 24px;
+      max-width: 70ch;
+    }
+    .panel {
+      border: 1px solid #1a1a1a;
+      background: #080808;
+      padding: 18px;
+      border-radius: 10px;
+      margin: 18px 0;
+    }
+    .btn {
+      display:inline-block;
+      padding: 12px 16px;
+      border: 1px solid #2a2a2a;
+      border-radius: 10px;
+      text-decoration:none;
+      color:#eaeaea;
+      background:#0b0b0b;
+    }
+    .btn:hover { border-color:#3a3a3a; background:#0f0f0f; }
+    .mono { white-space: pre-wrap; word-break: break-word; }
+    .small { font-size: 12px; opacity: 0.78; line-height: 1.6; }
+    .hr { height:1px; background:#1a1a1a; margin:18px 0; }
+    .warn { color:#bdbdbd; }
+    code { background:#0c0c0c; padding:2px 6px; border-radius:6px; border:1px solid #1a1a1a; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="topline">
+      <div class="tag">PROJECT VATA</div>
+      <div class="tag">TRANSMISSION: HUMAN OVERRIDE PROTOCOL</div>
+      <div class="tag">STATUS: PUBLIC DROP</div>
+    </div>
+
+    <h1>ACCESS</h1>
+    <div class="sub">
+      This is the public artifact.
+      <br/>Read slowly. Execute quietly.
+    </div>
+
+    <div class="panel">
+      <div class="small">DOWNLOAD PACKAGE</div>
+      <div style="margin-top:10px;">
+        <a class="btn" href="./VATA_DROP_v2_MASTER.zip" download>DOWNLOAD // VATA_DROP_v2_MASTER.zip</a>
+      </div>
+      <div class="hr"></div>
+      <div class="small">INCLUDES</div>
+      <div class="small warn">
+        - Human_Override_Protocol (PDF + MD)<br/>
+        - Checksum (SHA-256)
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="small">INTEGRITY</div>
+      <div class="mono small">Human_Override_Protocol_v2_MASTER.md</div>
+      <div class="hr"></div>
+      <div class="small">
+        VERIFY (PowerShell):<br/>
+        <code>Get-FileHash .\VATA_DROP_v2_MASTER.zip -Algorithm SHA256</code>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="small">NEXT</div>
+      <div class="small">
+        Operators request the Annex by sending:
+        <br/><br/>
+        <code>Search: PROJECT VATA</code>
+      </div>
+    </div>
+
+    <div class="small" style="opacity:.55; margin-top:24px;">
+      No trackers. No analytics. No noise.
+    </div>
+  </div>
+</body>
+</html>
