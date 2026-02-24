@@ -80,7 +80,22 @@
       <div style="margin-top:10px;">
         <a class="btn" href="./VATA_DROP_v2_MASTER.zip" download>DOWNLOAD // VATA_DROP_v2_MASTER.zip</a>
       </div>
+          <div class="panel">
+      <div class="small">VERIFY CHECKSUM (SHA-256)</div>
+      <div class="mono small" id="expectedHash">Human_Override_Protocol_v2_MASTER.md</div>
+      <div style="margin-top:10px; display:flex; gap:10px; flex-wrap:wrap;">
+        <a class="btn" href="checksum_v2_MASTER.txt">OPEN CHECKSUM FILE</a>
+        <button class="btn" onclick="copyHash()">COPY HASH</button>
+      </div>
       <div class="hr"></div>
+      <div class="small">
+        PowerShell (Windows):<br/>
+        <code>Get-FileHash .\VATA_DROP_v2_MASTER.zip -Algorithm SHA256</code>
+        <br/><br/>
+        Compare output to the expected hash above.
+      </div>
+    </div>
+<div class="hr"></div>
       <div class="small">INCLUDES</div>
       <div class="small warn">
         - Human_Override_Protocol (PDF + MD)<br/>
@@ -113,3 +128,4 @@
   </div>
 </body>
 </html>
+
